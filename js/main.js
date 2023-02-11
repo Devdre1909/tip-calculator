@@ -3,10 +3,17 @@ let noOfPeopleEl = document.querySelector("#people");
 let tipPercentages = document.querySelectorAll(".cl-tip");
 let tipAmountPerPersonEl = document.querySelector("#tip-per-person");
 let totalAmountPerPersonEl = document.querySelector("#total-per-person");
+let reset = document.querySelector(".tip-reset-btn");
 
 let billAmount = 0;
 let noOfPeople = 0;
 let tipPercentage = 0;
+
+reset.addEventListener("click", () => {
+  billEl.value = "";
+  noOfPeopleEl.value = "";
+  tipPercentages.forEach((tip) => tip.classList.remove("active"));
+});
 
 billEl.addEventListener("keyup", (e) => {
   billAmount = Number(e.target.value);
@@ -29,7 +36,6 @@ Array.from(tipPercentages).forEach((tipPercentageEl) => {
 });
 
 function calculateTip() {
-
   let tipAmount = billAmount * (tipPercentage / 100);
   let totalAmount = billAmount + tipAmount;
   let tipAmountPerPerson = tipAmount / noOfPeople;
